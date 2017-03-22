@@ -16,7 +16,7 @@ int main()
 	} while (State);
 	
 
-	cout << "kekkerit";
+
 }
 bool New_Items()
 {
