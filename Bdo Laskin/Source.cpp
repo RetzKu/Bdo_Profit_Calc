@@ -1,5 +1,6 @@
 #include "Tavara.h"
 #include <conio.h>
+#include <Windows.h>	
 
 using namespace std;
 
@@ -12,10 +13,10 @@ int main()
 
 	do
 	{
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 0, 0 });
 		State = New_Items();
 	} while (State);
 	
-
 
 }
 bool New_Items()
@@ -32,14 +33,19 @@ bool New_Items()
 	switch (Menu)
 	{
 	case '1':
-
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 0, 6 });
 		cout << "Nimi: ";
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 0, 7 });
 		getline(cin, Name);
 
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 7, 6 });
 		cout << "Maara: ";
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 7, 7 });
 		cin >> Amount;
 
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 15, 6 });
 		cout << "Hinta: ";
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 15, 7 });
 		cin >> Price;
 		cin.ignore(256, '\n');
 
@@ -50,5 +56,8 @@ bool New_Items()
 		return false;
 	}
 }
+void Clear_input()
+{
 
+}
 
