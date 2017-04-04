@@ -16,9 +16,17 @@ public:
 	void New_Item(string name, int amount, int price);
 	~Tavara();
 	vector<Tavara> Tavarat;
+	int Get_Calculated_Profit(int i)
+	{
+		Prof = Tavarat[i]._price*Tavarat[i]._amount;
+		Prof = Prof * 0.7;
+		Prof = Prof * 1.3;
+		return Prof;
+	}
 private:
 	string _name;
 	int _amount;
 	int _price;
+	int Prof;
 };
 

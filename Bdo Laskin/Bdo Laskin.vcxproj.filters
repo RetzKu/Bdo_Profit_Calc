@@ -18,12 +18,18 @@
     <ClInclude Include="Tavara.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Tuote.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tavara.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tuote.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
