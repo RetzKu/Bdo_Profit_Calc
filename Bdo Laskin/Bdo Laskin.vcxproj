@@ -140,10 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Tavara.h" />
+    <ClInclude Include="Tuote.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Tavara.cpp" />
+    <ClCompile Include="Tuote.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
