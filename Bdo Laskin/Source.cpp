@@ -7,14 +7,15 @@ using namespace std;
 
 bool New_Items();
 int Profit_Calc(int Price);
-void Clear_Lines(short Lines);
+void Clear_Lines(short Start, short End);
 void Print(string Line, int Endlines);
+int Get_Number(short Start, short End)
 
 	Tavara _Tavara;
 	Tuote _Tuote;
 
 	short x = 0;
-	short y = 6;
+	short y = 0;
 	short mb = 0;
 
 int main()
@@ -66,15 +67,32 @@ bool New_Items()
 	
 	string Name;
 	int Amount, Price;
-
-	Clear_Lines(4);
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 0, 0 });
-	Print("Lisätäänkö uusi tuotos?", 1);
-	Print("1. Lisää", 1);
-	Print("2. Poistu", 1);
-
 	char Menu = NULL;
-	Menu = getch();
+	
+	if (mb == 0)
+	{
+		Clear_Lines(0, 4);
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 0, 0 });
+		Print("Lisätäänkö uusi tuotos?", 1);
+		Print("1. Lisää", 1);
+		Print("2. Poistu", 1);
+
+		Menu = getch();
+		Clear_Lines(0,4);
+	}
+	else
+	{
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 0, 4 + mb });
+
+		Print("Lisätäänkö uusi tuotos?", 1);
+		Print("1. Lisää", 1);
+		Print("2. Poistu", 1);
+
+		
+		Menu = getch();
+		Clear_Lines(mb + 2, mb + 6);
+	}
+		
 	switch (Menu)
 	{
 	case '1':
@@ -87,7 +105,17 @@ bool New_Items()
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { x+20, y });
 		cout << "Maara: ";
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { x+20, y+1+mb });
-		cin >> Amount;
+		while (!(cin >> Amount)) {
+			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { x + 20, y + 1 + mb });
+			for (int i = 20; i < 40; i++)
+			{
+				cout << " ";
+			}
+			cin.clear();
+			cin.ignore(256, '\n');
+			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { x + 20, y + 1 + mb });
+		}
+			
 
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { x+40, y });
 		cout << "Hinta: ";
@@ -116,10 +144,10 @@ int Profit_Calc(int Price)
 	return Prof;
 
 }
-void Clear_Lines(short Lines)
+void Clear_Lines(short Start, short End)
 {
 	string Empty_Line(99,' ');
-	for (short i = 0; i < Lines; i++)
+	for (short i = Start; i < End; i++)
 	{
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 0, i });
 		cout << Empty_Line;
@@ -144,6 +172,10 @@ void Print(string Line, int Endlines)
 	{
 		cout << endl;
 	}
+}
+int Get_Number(short Start, short End)
+{
+
 }
 
 
