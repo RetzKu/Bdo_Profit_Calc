@@ -1,14 +1,21 @@
 #include "Tavara.h"
 #include <conio.h>
 #include "Tuote.h"
+#include <Windows.h>
 
 using namespace std;
 
 bool New_Items();
 int Profit_Calc(int Price);
+void Clear_Lines(short Lines);
+void Print(string Line, int Endlines);
 
 	Tavara _Tavara;
 	Tuote _Tuote;
+
+	short x = 0;
+	short y = 6;
+	short mb = 0;
 
 int main()
 {
@@ -19,20 +26,20 @@ int main()
 	int Price1;
 	
 
-	cout << "1.Lisää Käytetty esine" << endl;
-	cout << "2.Poistu" << endl;
+	Print("1.Lisää Käytetty esine",1);
+	Print("2.Poistu", 1);
 	char Menu = getch();
 	switch (Menu)
 	{
 	case '1':
 
-		cout << "Nimi: ";
-		getline(cin, Name);
+		/*cout << "Nimi: ";
+		getline(cin, Name);*/
 
-		cout << "Raha ennen: ";
+		Print("Raha ennen: ", 0);
 		cin >> Price1;
 
-		cout << "Raha jälkeen";
+		Print("Raha jälkeen: ", 0);
 		cin >> Price;
 		Price = Price1 - Price;
 
@@ -56,12 +63,15 @@ int main()
 }
 bool New_Items()
 {
+	
 	string Name;
 	int Amount, Price;
 
-	cout << "Lisätäänkö itemi" << endl;
-	cout << "1. Lisää" << endl;
-	cout << "2. Poistu" << endl;
+	Clear_Lines(4);
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 0, 0 });
+	Print("Lisätäänkö uusi tuotos?", 1);
+	Print("1. Lisää", 1);
+	Print("2. Poistu", 1);
 
 	char Menu = NULL;
 	Menu = getch();
@@ -69,15 +79,23 @@ bool New_Items()
 	{
 	case '1':
 
-		cout << "Nimi: ";
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { x, y });
+		cout <<  "Nimi: ";
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { x, y+1+mb });
 		getline(cin, Name);
 
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { x+20, y });
 		cout << "Maara: ";
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { x+20, y+1+mb });
 		cin >> Amount;
 
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { x+40, y });
 		cout << "Hinta: ";
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { x+40, y+1+mb });
 		cin >> Price;
 		cin.ignore(256, '\n');
+		mb = mb + 1;
+
 
 		_Tavara.New_Item(Name, Amount, Price);
 		return true;
@@ -97,6 +115,35 @@ int Profit_Calc(int Price)
 	Prof = Prof - Price;
 	return Prof;
 
+}
+void Clear_Lines(short Lines)
+{
+	string Empty_Line(99,' ');
+	for (short i = 0; i < Lines; i++)
+	{
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 0, i });
+		cout << Empty_Line;
+	}
+}
+void Print(string Line, int Endlines)
+{
+	int n = Line.length();
+	for (int i = 0; i < n; i++)
+	{
+		if (Line[i] == -28)
+		{
+			Line[i] = char(132);
+		}
+		if (Line[i] == -10)
+		{
+			Line[i] = char(148);
+		}
+	}
+	cout << Line;
+	for (int i = 0; i < Endlines; i++)
+	{
+		cout << endl;
+	}
 }
 
 
